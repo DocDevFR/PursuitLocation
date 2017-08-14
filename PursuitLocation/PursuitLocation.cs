@@ -8,7 +8,7 @@ namespace PursuitLocation
 	{
 		public override void Initialize()
 		{
-			Game.DisplayNotification("PursuitLocation ~g~ loaded");
+			Game.DisplayNotification("PursuitLocation ~g~loaded");
 			
 			Controller controller = new Controller();
 			
@@ -19,7 +19,13 @@ namespace PursuitLocation
 					GameFiber.Yield();
 					GameFiber.Sleep(1000);
 					
-					controller.process();
+					try {
+						controller.process();
+					} catch (Exception) {
+						Game.DisplayNotification("PursuitLocation occured an ~r~error");
+						return;
+					} 					
+					
 				}							                   	
 			}, "PursuitLocationFiber");
 		}
